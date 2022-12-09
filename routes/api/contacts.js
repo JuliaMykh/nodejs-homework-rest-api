@@ -3,8 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 const { contacts: ctrl } = require("../../controllers");
-const { validation } = require('../../validation/contacts');
-const { joiSchema, favoriteJoiSchema } = require('../../model/contact');
+const { validation, joiSchema, favoriteJoiSchema } = require('../../validation/contacts');
 
 
 router.get('/', ctrl.getAll);
