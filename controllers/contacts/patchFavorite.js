@@ -6,10 +6,6 @@ const patchFavorite = async (req, res, next) => {
         const { contactId } = req.params;
         const { favorite } = req.body;
 
-        if (!req.body) {
-            throw createError(400, "Missing field favorite");
-        }
-
         const result = await Contact.findByIdAndUpdate(contactId, { favorite }, { new: true });
 
         if (!result) {
@@ -26,7 +22,5 @@ const patchFavorite = async (req, res, next) => {
         next(error);
     }
 };
-
-
 
 module.exports = patchFavorite;
