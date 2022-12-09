@@ -1,24 +1,20 @@
 const Joi = require('joi');
+const createError = require('http-errors');
 
-const validation =  (req, res, next) => {
-    
-    const contactSchema = Joi.object({
-    name: Joi.string().min(3).required(),
-    email: Joi.string().email().required(),
-    phone: Joi.string().min(7).required(),
-    });
-    
-    const validationResult = contactSchema.validate(req.body);
+const validation = (schema) => {
+    return (req, res, next) => {
+        
+        if (Object.keys(req.body).length === 0) {
+            throw createError(400, "Missing field");
+        }
 
-    if (validationResult.error) {
-        return res.status(400)
-            .json({
-                'message': validationResult.error.message,
-                'status': 400,
-            });
-    }
-
-    next();
+        const { error } = schema.validate(req.body);
+        if (error) {
+            error.status = 400;
+            next(error);
+        }
+        next();
+    };
 };
 
 module.exports = validation;

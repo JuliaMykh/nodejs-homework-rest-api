@@ -1,6 +1,9 @@
 
 const validation = require('./contactsValidate');
+const { joiSchema, favoriteJoiSchema } = require('./contactsSchema');
 
 module.exports = {
-    validation
+    validation,
+    joiSchema,
+    favoriteJoiSchema
 }
