@@ -9,7 +9,7 @@ const { validation, joiSchema, favoriteJoiSchema } = require('../../validation/c
 
 router.get('/', auth, ctrl.getAll);
 
-router.get('/:contactId', ctrl.getById);
+router.get('/:contactId', auth,  ctrl.getById);
 
 router.post('/', auth, validation(joiSchema),  ctrl.add);
 
