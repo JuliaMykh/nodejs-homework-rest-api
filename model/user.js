@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-// const bcrypt = require("bcryptjs");
+
 
 const userSchema = Schema({
     password: {
@@ -16,12 +16,11 @@ const userSchema = Schema({
         enum: ["starter", "pro", "business"],
         default: "starter"
     },
-    token: String
+    token: {
+        type: String,
+        default: null,
+    },
 }, { versionKey: false, timestamps: true });
-
-// userSchema.methods.comparePassword = function (password) {
-//   return bcrypt.compareSync(password, this.password);
-// };
 
 const User = model("user", userSchema);
 
