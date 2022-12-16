@@ -13,7 +13,7 @@ router.get('/:contactId', auth,  ctrl.getById);
 
 router.post('/', auth, validation(joiSchema),  ctrl.add);
 
-router.delete('/:contactId', ctrl.deleteContact);
+router.delete('/:contactId', auth, ctrl.deleteContact);
 
 router.put('/:contactId', validation(joiSchema), ctrl.updateContact);
 
