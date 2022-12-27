@@ -4,7 +4,7 @@ const gravatar = require("gravatar");
 const { v4 } = require("uuid");
 
 const { User } = require("../../model");
-const { sendEmail } = require("../../helpers");
+const { sendContirmationEmail } = require("../../helpers");
 
 const register = async (req, res, next) => {
     try {
@@ -20,14 +20,8 @@ const register = async (req, res, next) => {
         const hashPassword = bcript.hashSync(password, bcript.genSaltSync(10));
         
         const result = await User.create({ email, password: hashPassword, avatarURL, verificationToken });
-        
-        const mail = {
-            to: email,
-            subject: "Email confirmation",
-            html: `<a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">Confirm Email</a>`
-        };
 
-        await sendEmail(mail);
+        await sendContirmationEmail(email, verificationToken);
         
         res.status(201).json({
             status: "success",
