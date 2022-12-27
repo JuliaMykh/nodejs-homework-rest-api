@@ -7,7 +7,11 @@ const joiUserSchema = Joi.object({
     token: Joi.string(),
 });
 
+const joiEmailSchema = Joi.object({
+    email: Joi.string().email().required(),
+});
+
 module.exports = {
     joiUserSchema,
-    
+    joiEmailSchema
 };
